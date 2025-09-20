@@ -19,10 +19,35 @@ const newPairs = [
 ];
 
 const highRiskPairs = [
+  '9czr2MVyxgPCnDrbA7ywaqG3K1fgCkCQYbwSBKxnMJFS', // Example high risk token
   'KSeAucEoqTBB4ttakHYE1encbxjn2u9zUa9ursDLe1E', // Example high risk token
-  '6HfaJiUuTXFZEfmdkQSNbvfe6i95Nh2wUVJ5dWMf7gtw', // Example high risk token
-  '9czr2MVyxgPCnDrbA7ywaqG3K1fgCkCQYbwSBKxnMJFS'  // Example high risk token
+  
+  '6HfaJiUuTXFZEfmdkQSNbvfe6i95Nh2wUVJ5dWMf7gtw',
+  'q4oggBDyBgQrCR8XbpjxULzehaTUokLYTZMnnJfVC6e',
 ];
+
+// Added dates for each token
+const tokenAddedDates = {
+ 
+ '6HfaJiUuTXFZEfmdkQSNbvfe6i95Nh2wUVJ5dWMf7gtw':'2025-09-20',
+  'q4oggBDyBgQrCR8XbpjxULzehaTUokLYTZMnnJfVC6e': '2025-09-20',
+   'GH8Ers4yzKR3UKDvgVu8cqJfGzU4cU62mTeg9bcJ7ug6': '2024-05-15',
+  '3ne4mWqdYuNiYrYZC9TrA3FcfuFdErghH97vNPbjicr1': '2024-05-16',
+  'EP2ib6dYdEeqD8MfE2ezHCxX3kP3K2eLKkirfPm5eyMx': '2024-05-17',
+  'YrrUStgPugDp8BbfosqDeFssen6sA75ZS1QJvgnHtmY': '2024-05-18',
+  'FAqh648xeeaTqL7du49sztp9nfj5PjRQrfvaMccyd9cz': '2024-05-19',
+  '4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i': '2024-05-20',
+  '9t1H1uDJ558iMPNkEPSN1fqkpC4XSPQ6cqSf6uEsTfTR': '2024-05-21',
+  '8WwcNqdZjCY5Pt7AkhupAFknV2txca9sq6YBkGzLbvdt': '2024-05-22',
+  'FRhB8L7Y9Qq41qZXYLtC2nw8An1RJfLLxRF2x9RwLLMo': '2024-05-23',
+  '9ViX1VductEoC2wERTSp2TuDxXPwAf69aeET8ENPJpsN': '2024-05-24',
+  '4qGs3cNRr48UWcCyDwJKr1EYCZXd1MGjco2qPr8YHKAm': '2024-05-25',
+  'D4XW4v4W6VcDmzX5c6F5mxERdSL2I1veo7QyEaVjnK7g': '2024-05-26',
+  '8WRYFLCrC6sL8L3oKc4v7qQyKErUyKQ8JvJqyf7qyKErU': '2024-05-27',
+  '7GCihgDB8fe6KN1R7QJ4VQJ1B1RyPK6Ubamw5xWzLL7W': '2024-05-28',
+  'HZRC4FNGtyvBaRgYVY6f7WIsWcf2pLjXbBfsBQFsmgXq': '2024-05-29',
+  'GfJ3Vq2nUMRA4sneEMwJ3q84P6JNTc7xZ1qL7xTFX9U9': '2024-05-30'
+};
 
 // ---------- Theme handling ----------
 const THEME_KEY = 'tikstake_theme';
@@ -99,6 +124,7 @@ async function fetchDexToken(pairId) {
 
     return {
       pairId,
+      addedDate: tokenAddedDates[pairId] || 'Unknown',
       name: p.baseToken?.name || 'Unknown',
       symbol: p.baseToken?.symbol || '',
       price: p.priceUsd ? parseFloat(p.priceUsd) : null,
@@ -112,6 +138,7 @@ async function fetchDexToken(pairId) {
     console.error('Error fetching token data:', error);
     return {
       pairId,
+      addedDate: tokenAddedDates[pairId] || 'Unknown',
       name: 'Error',
       symbol: 'ERR',
       price: null,
@@ -223,6 +250,11 @@ function openChart(pairId) {
             border-radius: 8px;
             background: ${theme === 'dark' ? '#0b1020' : '#fff'};
           }
+          .listed-date {
+            margin-top: 10px;
+            font-style: italic;
+            color: ${theme === 'dark' ? '#9ca3af' : '#6b7280'};
+          }
         </style>
       </head>
       <body>
@@ -252,6 +284,8 @@ function openChart(pairId) {
           </a>
         </p>
         ` : ''}
+        
+        <p class="listed-date"><strong>Listed on this dashboard:</strong> ${t.addedDate}</p>
         
         <iframe src="${chartUrl}" width="100%" height="500"></iframe>
       </body>
@@ -389,7 +423,7 @@ function setupAutoRefresh() {
   
   autoRefreshInterval = setInterval(() => {
     refreshAll();
-  }, 120000);
+  }, 120000); // 2 minutes
 }
 
 // ---------- Init ----------
@@ -454,4 +488,4 @@ function init() {
 document.addEventListener('DOMContentLoaded', init);
 
 // Expose for inline handler
-window.openChart = openChart;;
+window.openChart = openChart;
