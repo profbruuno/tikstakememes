@@ -9,7 +9,8 @@ const popularPairs = [
   '9t1H1uDJ558iMPNkEPSN1fqkpC4XSPQ6cqSf6uEsTfTR',
   '8WwcNqdZjCY5Pt7AkhupAFknV2txca9sq6YBkGzLbvdt',
   'FRhB8L7Y9Qq41qZXYLtC2nw8An1RJfLLxRF2x9RwLLMo',
-  '9ViX1VductEoC2wERTSp2TuDxXPwAf69aeET8ENPJpsN'
+  '9ViX1VductEoC2wERTSp2TuDxXPwAf69aeET8ENPJpsN',
+  '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama'
 ];
 
 const newPairs = [
@@ -46,7 +47,8 @@ const tokenAddedDates = {
   '8WRYFLCrC6sL8L3oKc4v7qQyKErUyKQ8JvJqyf7qyKErU': '2024-05-27',
   '7GCihgDB8fe6KN1R7QJ4VQJ1B1RyPK6Ubamw5xWzLL7W': '2024-05-28',
   'HZRC4FNGtyvBaRgYVY6f7WIsWcf2pLjXbBfsBQFsmgXq': '2024-05-29',
-  'GfJ3Vq2nUMRA4sneEMwJ3q84P6JNTc7xZ1qL7xTFX9U9': '2024-05-30'
+  'GfJ3Vq2nUMRA4sneEMwJ3q84P6JNTc7xZ1qL7xTFX9U9': '2024-05-30',
+  '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama': '2025-09-21'
 };
 
 // ---------- Theme handling ----------
