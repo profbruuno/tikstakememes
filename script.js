@@ -16,10 +16,7 @@ const popularPairs = [
 ];
 
 const newPairs = [
-  '4qGs3cNRr48UWcCyDwJKr1EYCZXd1MGjco2qPr8YHKAm',
-  'D4XW4v4W6VcDmzX5c6F5mxERdSL2I1veo7QyEaVjnK7g', // Example
-  '8WRYFLCrC6sL8L3oKc4v7qQyKErUyKQ8JvJqyf7qyKErU',  // Example
-  '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama',
+  '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama',// Troll
 ];
 
 const highRiskPairs = [
