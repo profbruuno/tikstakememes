@@ -10,22 +10,26 @@ const popularPairs = [
   '8WwcNqdZjCY5Pt7AkhupAFknV2txca9sq6YBkGzLbvdt',
   'FRhB8L7Y9Qq41qZXYLtC2nw8An1RJfLLxRF2x9RwLLMo',
   '9ViX1VductEoC2wERTSp2TuDxXPwAf69aeET8ENPJpsN',
-  '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama'
+  '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama',
+  
+  
 ];
 
 const newPairs = [
   '4qGs3cNRr48UWcCyDwJKr1EYCZXd1MGjco2qPr8YHKAm',
   'D4XW4v4W6VcDmzX5c6F5mxERdSL2I1veo7QyEaVjnK7g', // Example
   '8WRYFLCrC6sL8L3oKc4v7qQyKErUyKQ8JvJqyf7qyKErU',  // Example
-  '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama'
+  '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama',
 ];
 
 const highRiskPairs = [
   '9czr2MVyxgPCnDrbA7ywaqG3K1fgCkCQYbwSBKxnMJFS', // Example high risk token
   'KSeAucEoqTBB4ttakHYE1encbxjn2u9zUa9ursDLe1E', // Example high risk token
-  
   '6HfaJiUuTXFZEfmdkQSNbvfe6i95Nh2wUVJ5dWMf7gtw',
   'q4oggBDyBgQrCR8XbpjxULzehaTUokLYTZMnnJfVC6e',
+  '9czr2MVyxgPCnDrbA7ywaqG3K1fgCkCQYbwSBKxnMJFS',
+  '6GDrReNVfyjQDCuGMrKdG2JU7Uj8NCvBt2ukaL2mDj1L',
+  'EPVwQEJCnenVSNYECMA2955BGTqJk2ptXuggrvtiFFG2',
 ];
 
 // Added dates for each token
@@ -49,7 +53,10 @@ const tokenAddedDates = {
   '7GCihgDB8fe6KN1R7QJ4VQJ1B1RyPK6Ubamw5xWzLL7W': '2024-05-28',
   'HZRC4FNGtyvBaRgYVY6f7WIsWcf2pLjXbBfsBQFsmgXq': '2024-05-29',
   'GfJ3Vq2nUMRA4sneEMwJ3q84P6JNTc7xZ1qL7xTFX9U9': '2024-05-30',
-  '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama': '2025-09-21'
+  '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama': '2025-09-21',
+  '9czr2MVyxgPCnDrbA7ywaqG3K1fgCkCQYbwSBKxnMJFS': '2025-09-24',
+  '6GDrReNVfyjQDCuGMrKdG2JU7Uj8NCvBt2ukaL2mDj1L': '2025-09-24', 
+  'EPVwQEJCnenVSNYECMA2955BGTqJk2ptXuggrvtiFFG2': '2025-09-24',
 };
 
 // ---------- Theme handling ----------
