@@ -32,7 +32,6 @@ const highRiskPairs = [
 const tokenAddedDates = {
  
  '6HfaJiUuTXFZEfmdkQSNbvfe6i95Nh2wUVJ5dWMf7gtw':'2025-09-20',
-  'q4oggBDyBgQrCR8XbpjxULzehaTUokLYTZMnnJfVC6e': '2025-09-20',
    'GH8Ers4yzKR3UKDvgVu8cqJfGzU4cU62mTeg9bcJ7ug6': '2024-05-15',
   '3ne4mWqdYuNiYrYZC9TrA3FcfuFdErghH97vNPbjicr1': '2024-05-16',
   'EP2ib6dYdEeqD8MfE2ezHCxX3kP3K2eLKkirfPm5eyMx': '2024-05-17',
