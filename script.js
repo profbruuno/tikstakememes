@@ -26,6 +26,12 @@ const highRiskPairs = [
   '9czr2MVyxgPCnDrbA7ywaqG3K1fgCkCQYbwSBKxnMJFS',
   '6GDrReNVfyjQDCuGMrKdG2JU7Uj8NCvBt2ukaL2mDj1L',
   'EPVwQEJCnenVSNYECMA2955BGTqJk2ptXuggrvtiFFG2',
+  'HtTYHz1Kf3rrQo6AqDLmss7gq5WrkWAaXn3tupUZbonk',
+  'BFgdzMkTPdKKJeTipv2njtDEwhKxkgFueJQfJGt1jups',
+  'GpdRNotihwXZJ3z3y6yCRAhecFrALc4J8SX92pxnbonk',
+  'GaPbGp23pPuY9QBLPUjUEBn2MKEroTe9Q3M3f2Xpump',
+  'Ce2gx9KGXJ6C9Mp5b5x1sn9Mg87JwEbrQby4Zqo3pump',
+  
 ];
 
 // Added dates for each token
@@ -52,6 +58,11 @@ const tokenAddedDates = {
   '9czr2MVyxgPCnDrbA7ywaqG3K1fgCkCQYbwSBKxnMJFS': '2025-09-24',
   '6GDrReNVfyjQDCuGMrKdG2JU7Uj8NCvBt2ukaL2mDj1L': '2025-09-24', 
   'EPVwQEJCnenVSNYECMA2955BGTqJk2ptXuggrvtiFFG2': '2025-09-24',
+  'HtTYHz1Kf3rrQo6AqDLmss7gq5WrkWAaXn3tupUZbonk':'2025-09-30',
+  'BFgdzMkTPdKKJeTipv2njtDEwhKxkgFueJQfJGt1jups':'2025-09-30',
+  'GpdRNotihwXZJ3z3y6yCRAhecFrALc4J8SX92pxnbonk':'2025-09-30',
+  'GaPbGp23pPuY9QBLPUjUEBn2MKEroTe9Q3M3f2Xpump':'2025-09-30',
+'Ce2gx9KGXJ6C9Mp5b5x1sn9Mg87JwEbrQby4Zqo3pump':'2025-09-30',
 };
 
 // ---------- Theme handling ----------
