@@ -23,7 +23,6 @@ const highRiskPairs = [
   '9czr2MVyxgPCnDrbA7ywaqG3K1fgCkCQYbwSBKxnMJFS', // Example high risk token
   'KSeAucEoqTBB4ttakHYE1encbxjn2u9zUa9ursDLe1E', // Example high risk token
   '6HfaJiUuTXFZEfmdkQSNbvfe6i95Nh2wUVJ5dWMf7gtw',
-  '9czr2MVyxgPCnDrbA7ywaqG3K1fgCkCQYbwSBKxnMJFS',
   '6GDrReNVfyjQDCuGMrKdG2JU7Uj8NCvBt2ukaL2mDj1L',
   'EPVwQEJCnenVSNYECMA2955BGTqJk2ptXuggrvtiFFG2',
   'HtTYHz1Kf3rrQo6AqDLmss7gq5WrkWAaXn3tupUZbonk',
