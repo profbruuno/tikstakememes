@@ -13,7 +13,7 @@
         <h1>TikStake Memeboard</h1>
         <div class="status" id="connectionStatus">
           <span class="status-dot online"></span>
-          <span>Connected</span>
+          <span id="statusText">Connected</span>
         </div>
       </div>
       <div style="display: flex; gap: 10px; align-items: center;">
@@ -65,24 +65,22 @@
             <h4>Trojan Bot Features:</h4>
             <ul>
               <li>Key Features of the Trojan Bot</li>
-              
-<li>Non-Custodial Wallet Integration</li>
-<li>Lightning-Fast Trades</li> 
-<li>Anti-MEV Protection</li>
-<li>Automated Sniping</li>
-<li>Advanced Order Types</li>
-<li>Limit Orders</li>
-<li>DCA (Dollar-Cost Averaging) Orders</li>
-<li>Copy Trading</li>
-<li>Real-Time Monitoring & Alerts</li>
-<li>High Security</li> 
-<li>Intelligent Routing</li>
-<li>Bridge & Withdrawal Functionality</li>
-<li> Real-time token alerts</li>
+              <li>Non-Custodial Wallet Integration</li>
+              <li>Lightning-Fast Trades</li> 
+              <li>Anti-MEV Protection</li>
+              <li>Automated Sniping</li>
+              <li>Advanced Order Types</li>
+              <li>Limit Orders</li>
+              <li>DCA (Dollar-Cost Averaging) Orders</li>
+              <li>Copy Trading</li>
+              <li>Real-Time Monitoring & Alerts</li>
+              <li>High Security</li> 
+              <li>Intelligent Routing</li>
+              <li>Bridge & Withdrawal Functionality</li>
+              <li>Real-time token alerts</li>
               <li>Automated trading strategies</li>
               <li>Portfolio tracking</li>
               <li>Customizable notifications</li>
-              
             </ul>
           </div>
           
@@ -214,10 +212,103 @@
     </div>
 
     <div class="footer">
-      <p>TikStake Memeboard &copy; 2025 • Data provided here is for references only,invest with caution</p>
+      <p>TikStake Memeboard &copy; 2023 • Data provided by DexScreener</p>
     </div>
   </div>
 
   <script src="script.js"></script>
+  
+  <!-- Real Firebase Counter with Proper Analytics -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+    import { getFirestore, doc, setDoc, getDoc, updateDoc, increment, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBCONg4JM9jtThFa6ClRJQO15qPIX7QGUw",
+      authDomain: "tikstakememes.firebaseapp.com",
+      projectId: "tikstakememes",
+      storageBucket: "tikstakememes.appspot.com",
+      messagingSenderId: "462788871293",
+      appId: "1:462788871293:web:7ccd28b554760c04a09d14",
+      measurementId: "G-KT99VHJ4LT"
+    };
+
+    try {
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const today = new Date().toISOString().slice(0, 10);
+      const dailyRef = doc(db, "analytics", "daily");
+      const todayVisitorRef = doc(db, "dailyCounts", today);
+
+      console.log("Firebase analytics started for:", today);
+
+      // Track visitor and update all counters
+      async function trackVisitor() {
+        try {
+          const timestamp = new Date().toISOString();
+          
+          // 1. Add to visitor log
+          await addDoc(collection(db, "visitorLog"), {
+            timestamp: timestamp,
+            date: today,
+            userAgent: navigator.userAgent
+          });
+
+          // 2. Update daily counter
+          const dailySnap = await getDoc(todayVisitorRef);
+          if (dailySnap.exists()) {
+            await updateDoc(todayVisitorRef, {
+              realCount: increment(1),
+              lastUpdated: timestamp
+            });
+          } else {
+            await setDoc(todayVisitorRef, {
+              realCount: 1,
+              date: today,
+              created: timestamp
+            });
+          }
+
+          // 3. Update overall analytics
+          const analyticsSnap = await getDoc(dailyRef);
+          if (analyticsSnap.exists()) {
+            await updateDoc(dailyRef, {
+              totalVisitors: increment(1),
+              lastUpdated: timestamp
+            });
+          } else {
+            await setDoc(dailyRef, {
+              totalVisitors: 1,
+              created: timestamp
+            });
+          }
+
+          console.log("Visitor tracked successfully");
+
+        } catch (error) {
+          console.error("Tracking error:", error);
+        }
+      }
+
+      // Real-time listener for today's count
+      onSnapshot(todayVisitorRef, (snap) => {
+        if (snap.exists()) {
+          const data = snap.data();
+          const realCount = data.realCount || 0;
+          const displayCount = 50 + realCount; // Fake 50 + real count
+          document.getElementById("statusText").textContent = `Connected (Visitors today: ${displayCount})`;
+        } else {
+          document.getElementById("statusText").textContent = "Connected (Visitors today: 50)";
+        }
+      });
+
+      // Track this visitor
+      trackVisitor();
+
+    } catch (error) {
+      console.error("Firebase failed:", error);
+      document.getElementById("statusText").textContent = "Connected";
+    }
+  </script>
 </body>
 </html>
