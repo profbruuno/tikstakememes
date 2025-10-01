@@ -91,14 +91,48 @@ function initTheme() {
     });
   }
 }
-
-// ---------- Formatting helpers ----------
+// ---------- Enhanced Price Formatting ----------
 const fmtPrice = (n) => {
   if (n === null || n === undefined || isNaN(n)) return '-';
-  if (n >= 1) return '$' + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  if (n >= 0.0001) return '$' + n.toFixed(6);
+  if (n === 0) return '$0';
+  
+  // For prices >= 1, use normal formatting
+  if (n >= 1) {
+    return '$' + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  
+  // Convert to string to analyze the decimal places
+  const priceStr = n.toString();
+  
+  // For prices between 0.0001 and 1, show normal decimal format
+  if (n >= 0.0001) {
+    // Remove trailing zeros
+    let formatted = n.toFixed(6).replace(/\.?0+$/, '');
+    // Ensure we have at least 2 decimal places for readability
+    if (!formatted.includes('.')) {
+      formatted += '.00';
+    } else if (formatted.split('.')[1].length < 2) {
+      formatted += '0'.repeat(2 - formatted.split('.')[1].length);
+    }
+    return '$' + formatted;
+  }
+  
+  // For very small prices (< 0.0001), use subscript notation
+  // Count consecutive zeros after decimal point
+  const match = priceStr.match(/^0\.(0+)([1-9][0-9]*)/);
+  
+  if (match) {
+    const zerosCount = match[1].length;
+    const significantDigits = match[2].substring(0, 4); // Show up to 4 significant digits
+    
+    return `$0.0<sub>${zerosCount}</sub>${significantDigits}`;
+  }
+  
+  // Fallback for any other cases
   return '$' + n.toExponential(4);
 };
+
+// ---------- Formatting helpers ----------
 
 const fmtChange = (n) => {
   if (n === null || n === undefined || isNaN(n)) return '-';
@@ -202,17 +236,17 @@ function renderTable(array, containerId, withSearchSort, isHighRisk = false) {
     return;
   }
 
-  tbody.innerHTML = rows.map(t => `
-    <tr onclick="openChart('${t.pairId}')">
-      <td>${t.name}</td>
-      <td><strong>${t.symbol}</strong></td>
-      <td class="price-cell">${fmtPrice(t.price)}</td>
-      <td>$${(t.volume || 0).toLocaleString()}</td>
-      <td>${fmtChange(t.change)}</td>
-      <td>${t.liquidityUsd != null ? fmtMoney(t.liquidityUsd) : '-'}</td>
-      <td>${t.marketCap != null ? fmtMoney(t.marketCap) : '-'}</td>
-    </tr>
-  `).join('');
+tbody.innerHTML = rows.map(t => `
+  <tr onclick="openChart('${t.pairId}')">
+    <td>${t.name}</td>
+    <td><strong>${t.symbol}</strong></td>
+    <td class="price-cell">${fmtPrice(t.price)}</td>
+    <td>$${(t.volume || 0).toLocaleString()}</td>
+    <td>${fmtChange(t.change)}</td>
+    <td>${t.liquidityUsd != null ? fmtMoney(t.liquidityUsd) : '-'}</td>
+    <td>${t.marketCap != null ? fmtMoney(t.marketCap) : '-'}</td>
+  </tr>
+`).join('');
 }
 
 // ---------- Interactions ----------
