@@ -250,7 +250,7 @@ tbody.innerHTML = rows.map(t => `
 `).join('');
 }
 
-// ---------- Mobile Responsive Chart Page ----------
+// ---------- Full Screen Chart Page ----------
 function openChart(pairId) {
   const t = [...popularListings, ...newListings, ...highRiskListings].find(x => x.pairId === pairId);
   if (!t) return;
@@ -273,10 +273,23 @@ function openChart(pairId) {
           
           body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            padding: 15px;
             background: ${theme === 'dark' ? '#0b1020' : '#f9f9f9'};
             color: ${theme === 'dark' ? '#e6e7ea' : '#222'};
             min-height: 100vh;
+            overflow: hidden;
+          }
+          
+          .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            transition: all 0.3s ease;
+          }
+          
+          /* Normal mode styles */
+          .normal-mode {
+            padding: 15px;
+            overflow-y: auto;
           }
           
           .container {
@@ -284,21 +297,34 @@ function openChart(pairId) {
             margin: 0 auto;
           }
           
-          .back-button {
-            display: inline-block;
+          .header-controls {
+            display: flex;
+            gap: 10px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+          }
+          
+          .back-button, .fullscreen-button {
             padding: 12px 18px;
             background: ${theme === 'dark' ? '#1f2937' : '#111827'};
             color: ${theme === 'dark' ? '#e6e7ea' : '#fff'};
-            text-decoration: none;
+            border: none;
             border-radius: 8px;
             font-weight: 500;
             font-size: 14px;
-            border: none;
             cursor: pointer;
+            transition: background 0.2s;
           }
           
-          .header {
+          .fullscreen-button {
+            background: ${theme === 'dark' ? '#3b82f6' : '#2563eb'};
+          }
+          
+          .back-button:hover, .fullscreen-button:hover {
+            opacity: 0.9;
+          }
+          
+          .token-header {
             margin-bottom: 20px;
           }
           
@@ -370,6 +396,7 @@ function openChart(pairId) {
           .chart-container {
             width: 100%;
             margin-bottom: 20px;
+            flex: 1;
           }
           
           .chart-iframe {
@@ -379,9 +406,52 @@ function openChart(pairId) {
             background: ${theme === 'dark' ? '#0b1020' : '#fff'};
           }
           
+          /* Fullscreen mode styles */
+          .fullscreen-mode {
+            padding: 0;
+          }
+          
+          .fullscreen-mode .normal-content {
+            display: none;
+          }
+          
+          .fullscreen-mode .chart-container {
+            margin: 0;
+            height: 100vh;
+          }
+          
+          .fullscreen-mode .chart-iframe {
+            border-radius: 0;
+            border: none;
+            height: 100vh;
+          }
+          
+          .fullscreen-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: none;
+          }
+          
+          .fullscreen-mode .fullscreen-controls {
+            display: block;
+          }
+          
+          .exit-fullscreen-button {
+            padding: 12px 18px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+          }
+          
           /* Mobile styles */
           @media (max-width: 768px) {
-            body {
+            .normal-mode {
               padding: 10px;
             }
             
@@ -406,10 +476,13 @@ function openChart(pairId) {
               font-size: 0.9rem;
             }
             
-            .back-button {
+            .header-controls {
+              flex-direction: column;
+            }
+            
+            .back-button, .fullscreen-button {
               width: 100%;
               text-align: center;
-              margin-bottom: 15px;
             }
             
             .chart-iframe {
@@ -418,6 +491,11 @@ function openChart(pairId) {
             
             .address-section, .listed-date {
               padding: 12px;
+            }
+            
+            .fullscreen-controls {
+              top: 10px;
+              right: 10px;
             }
           }
           
@@ -440,56 +518,118 @@ function openChart(pairId) {
         </style>
       </head>
       <body>
-        <div class="container">
-          <button class="back-button" onclick="window.close()">← Close Chart</button>
-          
-          <div class="header">
-            <h1 class="token-title">${t.name} (${t.symbol})</h1>
+        <div class="app-container">
+          <div class="normal-mode" id="normalMode">
+            <div class="container">
+              <div class="header-controls">
+                <button class="back-button" onclick="window.close()">← Close Chart</button>
+                <button class="fullscreen-button" onclick="enterFullscreen()">📈 Full Screen Chart</button>
+              </div>
+              
+              <div class="token-header">
+                <h1 class="token-title">${t.name} (${t.symbol})</h1>
+              </div>
+              
+              <div class="info-grid">
+                <div class="info-card">
+                  <strong>Price</strong>
+                  <span>${fmtPrice(t.price)}</span>
+                </div>
+                <div class="info-card">
+                  <strong>Liquidity</strong>
+                  <span>${t.liquidityUsd != null ? '$' + t.liquidityUsd.toLocaleString() : '-'}</span>
+                </div>
+                <div class="info-card">
+                  <strong>Market Cap</strong>
+                  <span>${t.marketCap != null ? '$' + t.marketCap.toLocaleString() : '-'}</span>
+                </div>
+                <div class="info-card">
+                  <strong>24h Change</strong>
+                  <span>${fmtChange(t.change)}</span>
+                </div>
+              </div>
+              
+              ${t.tokenAddress ? `
+              <div class="address-section">
+                <strong>Mint Address</strong>
+                <a href="${solscanUrl}" target="_blank" class="address-link">
+                  ${shortenAddress(t.tokenAddress)}
+                </a>
+              </div>
+              ` : ''}
+              
+              <div class="listed-date">
+                <strong>Listed on this dashboard:</strong> ${t.addedDate}
+              </div>
+              
+              <div class="chart-container">
+                <iframe 
+                  src="${chartUrl}" 
+                  class="chart-iframe"
+                  frameborder="0"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
           </div>
           
-          <div class="info-grid">
-            <div class="info-card">
-              <strong>Price</strong>
-              <span>${fmtPrice(t.price)}</span>
-            </div>
-            <div class="info-card">
-              <strong>Liquidity</strong>
-              <span>${t.liquidityUsd != null ? '$' + t.liquidityUsd.toLocaleString() : '-'}</span>
-            </div>
-            <div class="info-card">
-              <strong>Market Cap</strong>
-              <span>${t.marketCap != null ? '$' + t.marketCap.toLocaleString() : '-'}</span>
-            </div>
-            <div class="info-card">
-              <strong>24h Change</strong>
-              <span>${fmtChange(t.change)}</span>
-            </div>
-          </div>
-          
-          ${t.tokenAddress ? `
-          <div class="address-section">
-            <strong>Mint Address</strong>
-            <a href="${solscanUrl}" target="_blank" class="address-link">
-              ${shortenAddress(t.tokenAddress)}
-            </a>
-          </div>
-          ` : ''}
-          
-          <div class="listed-date">
-            <strong>Listed on this dashboard:</strong> ${t.addedDate}
-          </div>
-          
-          <div class="chart-container">
-            <iframe 
-              src="${chartUrl}" 
-              class="chart-iframe"
-              frameborder="0"
-              allowfullscreen>
-            </iframe>
+          <div class="fullscreen-controls">
+            <button class="exit-fullscreen-button" onclick="exitFullscreen()">✕ Exit Full Screen</button>
           </div>
         </div>
         
         <script>
+          let isFullscreen = false;
+          
+          function enterFullscreen() {
+            const appContainer = document.querySelector('.app-container');
+            const normalMode = document.getElementById('normalMode');
+            
+            appContainer.classList.add('fullscreen-mode');
+            normalMode.classList.add('fullscreen-mode');
+            isFullscreen = true;
+            
+            // Force iframe to take full viewport
+            const iframe = document.querySelector('.chart-iframe');
+            iframe.style.height = '100vh';
+            iframe.style.width = '100vw';
+            iframe.style.position = 'fixed';
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.style.zIndex = '999';
+            
+            // Hide scrollbars
+            document.body.style.overflow = 'hidden';
+          }
+          
+          function exitFullscreen() {
+            const appContainer = document.querySelector('.app-container');
+            const normalMode = document.getElementById('normalMode');
+            
+            appContainer.classList.remove('fullscreen-mode');
+            normalMode.classList.remove('fullscreen-mode');
+            isFullscreen = false;
+            
+            // Reset iframe styles
+            const iframe = document.querySelector('.chart-iframe');
+            iframe.style.height = '';
+            iframe.style.width = '';
+            iframe.style.position = '';
+            iframe.style.top = '';
+            iframe.style.left = '';
+            iframe.style.zIndex = '';
+            
+            // Restore scroll
+            document.body.style.overflow = 'auto';
+          }
+          
+          // Handle ESC key to exit fullscreen
+          document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && isFullscreen) {
+              exitFullscreen();
+            }
+          });
+          
           // Additional mobile handling
           function isMobile() {
             return window.innerWidth <= 768;
@@ -497,9 +637,11 @@ function openChart(pairId) {
           
           // Adjust iframe height on resize
           function adjustIframeHeight() {
-            const iframe = document.querySelector('.chart-iframe');
-            if (iframe && isMobile()) {
-              iframe.style.height = Math.min(window.innerHeight * 0.6, 500) + 'px';
+            if (!isFullscreen) {
+              const iframe = document.querySelector('.chart-iframe');
+              if (iframe && isMobile()) {
+                iframe.style.height = Math.min(window.innerHeight * 0.6, 500) + 'px';
+              }
             }
           }
           
