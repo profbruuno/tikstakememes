@@ -91,6 +91,7 @@ function initTheme() {
     });
   }
 }
+
 // ---------- Enhanced Price Formatting ----------
 const fmtPrice = (n) => {
   if (n === null || n === undefined || isNaN(n)) return '-';
@@ -249,7 +250,7 @@ tbody.innerHTML = rows.map(t => `
 `).join('');
 }
 
-// ---------- Interactions ----------
+// ---------- Mobile Responsive Chart Page ----------
 function openChart(pairId) {
   const t = [...popularListings, ...newListings, ...highRiskListings].find(x => x.pairId === pairId);
   if (!t) return;
@@ -262,78 +263,254 @@ function openChart(pairId) {
     <html>
       <head>
         <title>${t.name} (${t.symbol})</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
+          * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+          }
+          
           body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            padding: 20px;
+            padding: 15px;
             background: ${theme === 'dark' ? '#0b1020' : '#f9f9f9'};
             color: ${theme === 'dark' ? '#e6e7ea' : '#222'};
+            min-height: 100vh;
           }
+          
+          .container {
+            max-width: 1200px;
+            margin: 0 auto;
+          }
+          
           .back-button {
             display: inline-block;
             margin-bottom: 20px;
-            padding: 10px 16px;
+            padding: 12px 18px;
             background: ${theme === 'dark' ? '#1f2937' : '#111827'};
             color: ${theme === 'dark' ? '#e6e7ea' : '#fff'};
             text-decoration: none;
             border-radius: 8px;
             font-weight: 500;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
           }
-          .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
+          
+          .header {
             margin-bottom: 20px;
           }
+          
+          .token-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: ${theme === 'dark' ? '#e6e7ea' : '#222'};
+          }
+          
+          .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+          }
+          
           .info-card {
             background: ${theme === 'dark' ? '#0f172a' : '#fff'};
-            padding: 16px;
+            padding: 15px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid ${theme === 'dark' ? '#374151' : '#e5e7eb'};
           }
-          iframe {
+          
+          .info-card strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: ${theme === 'dark' ? '#9ca3af' : '#6b7280'};
+          }
+          
+          .info-card span {
+            font-size: 1rem;
+            font-weight: 600;
+          }
+          
+          .address-section {
+            background: ${theme === 'dark' ? '#0f172a' : '#fff'};
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid ${theme === 'dark' ? '#374151' : '#e5e7eb'};
+          }
+          
+          .address-section strong {
+            display: block;
+            margin-bottom: 8px;
+            color: ${theme === 'dark' ? '#9ca3af' : '#6b7280'};
+          }
+          
+          .address-link {
+            color: ${theme === 'dark' ? '#60a5fa' : '#3b82f6'};
+            text-decoration: none;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 0.9rem;
+          }
+          
+          .listed-date {
+            background: ${theme === 'dark' ? '#0f172a' : '#fff'};
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid ${theme === 'dark' ? '#374151' : '#e5e7eb'};
+            font-style: italic;
+            color: ${theme === 'dark' ? '#9ca3af' : '#6b7280'};
+          }
+          
+          .chart-container {
+            width: 100%;
+            margin-bottom: 20px;
+          }
+          
+          .chart-iframe {
+            width: 100%;
             border: 1px solid ${theme === 'dark' ? '#374151' : '#ddd'};
             border-radius: 8px;
             background: ${theme === 'dark' ? '#0b1020' : '#fff'};
           }
-          .listed-date {
-            margin-top: 10px;
-            font-style: italic;
-            color: ${theme === 'dark' ? '#9ca3af' : '#6b7280'};
+          
+          /* Mobile styles */
+          @media (max-width: 768px) {
+            body {
+              padding: 10px;
+            }
+            
+            .token-title {
+              font-size: 1.3rem;
+            }
+            
+            .info-grid {
+              grid-template-columns: 1fr 1fr;
+              gap: 10px;
+            }
+            
+            .info-card {
+              padding: 12px;
+            }
+            
+            .info-card strong {
+              font-size: 0.8rem;
+            }
+            
+            .info-card span {
+              font-size: 0.9rem;
+            }
+            
+            .back-button {
+              width: 100%;
+              text-align: center;
+              margin-bottom: 15px;
+            }
+            
+            .chart-iframe {
+              height: 400px;
+            }
+            
+            .address-section, .listed-date {
+              padding: 12px;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            .info-grid {
+              grid-template-columns: 1fr;
+            }
+            
+            .chart-iframe {
+              height: 350px;
+            }
+          }
+          
+          /* Desktop styles */
+          @media (min-width: 769px) {
+            .chart-iframe {
+              height: 500px;
+            }
           }
         </style>
       </head>
       <body>
-        <a href="/" class="back-button">← Return to Dashboard</a>
-
-        <h2>${t.name} (${t.symbol})</h2>
-        
-        <div class="info-grid">
-          <div class="info-card">
-            <strong>Price:</strong> ${fmtPrice(t.price)}
+        <div class="container">
+          <button class="back-button" onclick="window.close()">← Close Chart</button>
+          
+          <div class="header">
+            <h1 class="token-title">${t.name} (${t.symbol})</h1>
           </div>
-          <div class="info-card">
-            <strong>Liquidity:</strong> ${t.liquidityUsd != null ? '$' + t.liquidityUsd.toLocaleString() : '-'}
+          
+          <div class="info-grid">
+            <div class="info-card">
+              <strong>Price</strong>
+              <span>${fmtPrice(t.price)}</span>
+            </div>
+            <div class="info-card">
+              <strong>Liquidity</strong>
+              <span>${t.liquidityUsd != null ? '$' + t.liquidityUsd.toLocaleString() : '-'}</span>
+            </div>
+            <div class="info-card">
+              <strong>Market Cap</strong>
+              <span>${t.marketCap != null ? '$' + t.marketCap.toLocaleString() : '-'}</span>
+            </div>
+            <div class="info-card">
+              <strong>24h Change</strong>
+              <span>${fmtChange(t.change)}</span>
+            </div>
           </div>
-          <div class="info-card">
-            <strong>Market Cap:</strong> ${t.marketCap != null ? '$' + t.marketCap.toLocaleString() : '-'}
+          
+          ${t.tokenAddress ? `
+          <div class="address-section">
+            <strong>Mint Address</strong>
+            <a href="${solscanUrl}" target="_blank" class="address-link">
+              ${shortenAddress(t.tokenAddress)}
+            </a>
           </div>
-          <div class="info-card">
-            <strong>24h Change:</strong> ${fmtChange(t.change)}
+          ` : ''}
+          
+          <div class="listed-date">
+            <strong>Listed on this dashboard:</strong> ${t.addedDate}
+          </div>
+          
+          <div class="chart-container">
+            <iframe 
+              src="${chartUrl}" 
+              class="chart-iframe"
+              frameborder="0"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
         
-        ${t.tokenAddress ? `
-        <p><strong>Mint Address:</strong> 
-          <a href="${solscanUrl}" target="_blank" style="color: #3b82f6;">
-            ${shortenAddress(t.tokenAddress)}
-          </a>
-        </p>
-        ` : ''}
-        
-        <p class="listed-date"><strong>Listed on this dashboard:</strong> ${t.addedDate}</p>
-        
-        <iframe src="${chartUrl}" width="100%" height="500"></iframe>
+        <script>
+          // Additional mobile handling
+          function isMobile() {
+            return window.innerWidth <= 768;
+          }
+          
+          // Adjust iframe height on resize
+          function adjustIframeHeight() {
+            const iframe = document.querySelector('.chart-iframe');
+            if (iframe && isMobile()) {
+              iframe.style.height = Math.min(window.innerHeight * 0.6, 500) + 'px';
+            }
+          }
+          
+          window.addEventListener('resize', adjustIframeHeight);
+          window.addEventListener('load', adjustIframeHeight);
+          
+          // Handle back button
+          document.querySelector('.back-button').addEventListener('click', function() {
+            window.close();
+          });
+        </script>
       </body>
     </html>
   `;
