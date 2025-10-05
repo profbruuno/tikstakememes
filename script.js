@@ -250,7 +250,7 @@ tbody.innerHTML = rows.map(t => `
 `).join('');
 }
 
-// ---------- Mobile Responsive Chart Page ----------
+// ---------- Full Screen Chart Page ----------
 function openChart(pairId) {
   const t = [...popularListings, ...newListings, ...highRiskListings].find(x => x.pairId === pairId);
   if (!t) return;
@@ -273,10 +273,24 @@ function openChart(pairId) {
           
           body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            padding: 15px;
             background: ${theme === 'dark' ? '#0b1020' : '#f9f9f9'};
             color: ${theme === 'dark' ? '#e6e7ea' : '#222'};
             min-height: 100vh;
+            overflow: hidden;
+          }
+          
+          .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            transition: all 0.3s ease;
+          }
+          
+          /* Normal mode styles */
+          .normal-mode {
+            padding: 15px;
+            overflow-y: auto;
+            flex: 1;
           }
           
           .container {
@@ -284,21 +298,34 @@ function openChart(pairId) {
             margin: 0 auto;
           }
           
-          .back-button {
-            display: inline-block;
+          .header-controls {
+            display: flex;
+            gap: 10px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+          }
+          
+          .back-button, .fullscreen-button {
             padding: 12px 18px;
             background: ${theme === 'dark' ? '#1f2937' : '#111827'};
             color: ${theme === 'dark' ? '#e6e7ea' : '#fff'};
-            text-decoration: none;
+            border: none;
             border-radius: 8px;
             font-weight: 500;
             font-size: 14px;
-            border: none;
             cursor: pointer;
+            transition: background 0.2s;
           }
           
-          .header {
+          .fullscreen-button {
+            background: ${theme === 'dark' ? '#3b82f6' : '#2563eb'};
+          }
+          
+          .back-button:hover, .fullscreen-button:hover {
+            opacity: 0.9;
+          }
+          
+          .token-header {
             margin-bottom: 20px;
           }
           
@@ -370,6 +397,7 @@ function openChart(pairId) {
           .chart-container {
             width: 100%;
             margin-bottom: 20px;
+            flex: 1;
           }
           
           .chart-iframe {
@@ -379,9 +407,79 @@ function openChart(pairId) {
             background: ${theme === 'dark' ? '#0b1020' : '#fff'};
           }
           
+          /* Fullscreen mode styles */
+          body.fullscreen-mode {
+            overflow: hidden;
+          }
+          
+          .fullscreen-mode .app-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10000;
+            background: ${theme === 'dark' ? '#0b1020' : '#f9f9f9'};
+          }
+          
+          .fullscreen-mode .normal-mode {
+            display: none;
+          }
+          
+          .fullscreen-mode .fullscreen-container {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+          }
+          
+          .fullscreen-mode .fullscreen-chart {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10001;
+          }
+          
+          .fullscreen-controls {
+            display: none;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 10002;
+          }
+          
+          .fullscreen-mode .fullscreen-controls {
+            display: block;
+          }
+          
+          .exit-fullscreen-button {
+            padding: 8px 12px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 12px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.2s;
+          }
+          
+          .exit-fullscreen-button:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.05);
+          }
+          
+          .fullscreen-container {
+            display: none;
+          }
+          
           /* Mobile styles */
           @media (max-width: 768px) {
-            body {
+            .normal-mode {
               padding: 10px;
             }
             
@@ -406,10 +504,13 @@ function openChart(pairId) {
               font-size: 0.9rem;
             }
             
-            .back-button {
+            .header-controls {
+              flex-direction: column;
+            }
+            
+            .back-button, .fullscreen-button {
               width: 100%;
               text-align: center;
-              margin-bottom: 15px;
             }
             
             .chart-iframe {
@@ -418,6 +519,16 @@ function openChart(pairId) {
             
             .address-section, .listed-date {
               padding: 12px;
+            }
+            
+            .fullscreen-controls {
+              top: 10px;
+              right: 10px;
+            }
+            
+            .exit-fullscreen-button {
+              padding: 6px 10px;
+              font-size: 11px;
             }
           }
           
@@ -440,56 +551,125 @@ function openChart(pairId) {
         </style>
       </head>
       <body>
-        <div class="container">
-          <button class="back-button" onclick="window.close()">← Close Chart</button>
-          
-          <div class="header">
-            <h1 class="token-title">${t.name} (${t.symbol})</h1>
+        <div class="app-container">
+          <div class="normal-mode" id="normalMode">
+            <div class="container">
+              <div class="header-controls">
+                <button class="back-button" onclick="window.close()">← Close Chart</button>
+                <button class="fullscreen-button" onclick="enterFullscreen()">📈 Full Screen Chart</button>
+              </div>
+              
+              <div class="token-header">
+                <h1 class="token-title">${t.name} (${t.symbol})</h1>
+              </div>
+              
+              <div class="info-grid">
+                <div class="info-card">
+                  <strong>Price</strong>
+                  <span>${fmtPrice(t.price)}</span>
+                </div>
+                <div class="info-card">
+                  <strong>Liquidity</strong>
+                  <span>${t.liquidityUsd != null ? '$' + t.liquidityUsd.toLocaleString() : '-'}</span>
+                </div>
+                <div class="info-card">
+                  <strong>Market Cap</strong>
+                  <span>${t.marketCap != null ? '$' + t.marketCap.toLocaleString() : '-'}</span>
+                </div>
+                <div class="info-card">
+                  <strong>24h Change</strong>
+                  <span>${fmtChange(t.change)}</span>
+                </div>
+              </div>
+              
+              ${t.tokenAddress ? `
+              <div class="address-section">
+                <strong>Mint Address</strong>
+                <a href="${solscanUrl}" target="_blank" class="address-link">
+                  ${shortenAddress(t.tokenAddress)}
+                </a>
+              </div>
+              ` : ''}
+              
+              <div class="listed-date">
+                <strong>Listed on this dashboard:</strong> ${t.addedDate}
+              </div>
+              
+              <div class="chart-container">
+                <iframe 
+                  src="${chartUrl}" 
+                  class="chart-iframe"
+                  frameborder="0"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
           </div>
           
-          <div class="info-grid">
-            <div class="info-card">
-              <strong>Price</strong>
-              <span>${fmtPrice(t.price)}</span>
-            </div>
-            <div class="info-card">
-              <strong>Liquidity</strong>
-              <span>${t.liquidityUsd != null ? '$' + t.liquidityUsd.toLocaleString() : '-'}</span>
-            </div>
-            <div class="info-card">
-              <strong>Market Cap</strong>
-              <span>${t.marketCap != null ? '$' + t.marketCap.toLocaleString() : '-'}</span>
-            </div>
-            <div class="info-card">
-              <strong>24h Change</strong>
-              <span>${fmtChange(t.change)}</span>
-            </div>
-          </div>
-          
-          ${t.tokenAddress ? `
-          <div class="address-section">
-            <strong>Mint Address</strong>
-            <a href="${solscanUrl}" target="_blank" class="address-link">
-              ${shortenAddress(t.tokenAddress)}
-            </a>
-          </div>
-          ` : ''}
-          
-          <div class="listed-date">
-            <strong>Listed on this dashboard:</strong> ${t.addedDate}
-          </div>
-          
-          <div class="chart-container">
+          <div class="fullscreen-container" id="fullscreenContainer">
             <iframe 
               src="${chartUrl}" 
-              class="chart-iframe"
+              class="fullscreen-chart"
               frameborder="0"
               allowfullscreen>
             </iframe>
           </div>
+          
+          <div class="fullscreen-controls" id="fullscreenControls">
+            <button class="exit-fullscreen-button" onclick="exitFullscreen()">✕ Exit</button>
+          </div>
         </div>
         
         <script>
+          let isFullscreen = false;
+          
+          function enterFullscreen() {
+            const body = document.body;
+            const fullscreenContainer = document.getElementById('fullscreenContainer');
+            const fullscreenControls = document.getElementById('fullscreenControls');
+            
+            // Add fullscreen classes
+            body.classList.add('fullscreen-mode');
+            
+            // Show fullscreen container and controls
+            fullscreenContainer.style.display = 'block';
+            fullscreenControls.style.display = 'block';
+            
+            // Hide scrollbars
+            document.body.style.overflow = 'hidden';
+            
+            isFullscreen = true;
+            
+            console.log('Entered fullscreen mode');
+          }
+          
+          function exitFullscreen() {
+            const body = document.body;
+            const fullscreenContainer = document.getElementById('fullscreenContainer');
+            const fullscreenControls = document.getElementById('fullscreenControls');
+            
+            // Remove fullscreen classes
+            body.classList.remove('fullscreen-mode');
+            
+            // Hide fullscreen container and controls
+            fullscreenContainer.style.display = 'none';
+            fullscreenControls.style.display = 'none';
+            
+            // Restore scroll
+            document.body.style.overflow = 'auto';
+            
+            isFullscreen = false;
+            
+            console.log('Exited fullscreen mode');
+          }
+          
+          // Handle ESC key to exit fullscreen
+          document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && isFullscreen) {
+              exitFullscreen();
+            }
+          });
+          
           // Additional mobile handling
           function isMobile() {
             return window.innerWidth <= 768;
@@ -497,9 +677,11 @@ function openChart(pairId) {
           
           // Adjust iframe height on resize
           function adjustIframeHeight() {
-            const iframe = document.querySelector('.chart-iframe');
-            if (iframe && isMobile()) {
-              iframe.style.height = Math.min(window.innerHeight * 0.6, 500) + 'px';
+            if (!isFullscreen) {
+              const iframe = document.querySelector('.chart-iframe');
+              if (iframe && isMobile()) {
+                iframe.style.height = Math.min(window.innerHeight * 0.6, 500) + 'px';
+              }
             }
           }
           
