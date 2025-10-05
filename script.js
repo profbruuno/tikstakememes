@@ -14,6 +14,7 @@ const popularPairs = [
 ];
 
 const newPairs = [
+  'BuX9TN5doE5hCqpcmqMKYkidXC8zgBK5wHHKujdaAbiQ',//RYS
   '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama',// Troll
   '7ccKzmrXBpFHwyZGPqPuKL6bEyWAETSnHwnWe3jEneVc',
   '8oopi6gVFh4FA1mL5Jj35yRetfpmWiUDTfhCv31gkA3v',
@@ -32,7 +33,7 @@ const highRiskPairs = [
 
 // Added dates for each token
 const tokenAddedDates = {
- 
+ 'BuX9TN5doE5hCqpcmqMKYkidXC8zgBK5wHHKujdaAbiQ':'2025-10-05',//RYS
  '6HfaJiUuTXFZEfmdkQSNbvfe6i95Nh2wUVJ5dWMf7gtw':'2025-09-20',
    'GH8Ers4yzKR3UKDvgVu8cqJfGzU4cU62mTeg9bcJ7ug6': '2024-05-15',
   '3ne4mWqdYuNiYrYZC9TrA3FcfuFdErghH97vNPbjicr1': '2024-05-16',
