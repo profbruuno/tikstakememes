@@ -14,6 +14,7 @@ const popularPairs = [
 ];
 
 const newPairs = [
+  'BVktK8Q7tPZkxuyoWwERCwfGbdF4rrB7BKBfFfdEpump',//Humanai
   'BuX9TN5doE5hCqpcmqMKYkidXC8zgBK5wHHKujdaAbiQ',//RYS
   '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama',// Troll
   '7ccKzmrXBpFHwyZGPqPuKL6bEyWAETSnHwnWe3jEneVc',
@@ -60,6 +61,7 @@ const tokenAddedDates = {
   '5wNu5QhdpRGrL37ffcd6TMMqZugQgxwafgz477rShtHy':'2025-09-30',
   'UKSPrYDU4veB4cAfV9HkzNg9gNP1jsoch8oySMG9tcJ':'2025-09-30',
   'Q2sPHPdUWFMg7M7wwrQKLrn619cAucfRsmhVJffodSp':'2025-09-30',
+  'BVktK8Q7tPZkxuyoWwERCwfGbdF4rrB7BKBfFfdEpump':'2025-10-06',
 };
 
 // ---------- Theme handling ----------
