@@ -39,16 +39,16 @@ const highRiskPairs = [
 const tokenListingData = {
   'BuX9TN5doE5hCqpcmqMKYkidXC8zgBK5wHHKujdaAbiQ': { date: '2025-10-05', price: 0.0001 }, // RYS
   '6HfaJiUuTXFZEfmdkQSNbvfe6i95Nh2wUVJ5dWMf7gtw': { date: '2025-09-20', price: 0.00015 },
-  '3ne4mWqdYuNiYrYZC9TrA3FcfuFdErghH97vNPbjicr1': { date: '2024-05-16', price: 0.0005 },
-  'EP2ib6dYdEeqD8MfE2ezHCxX3kP3K2eLKkirfPm5eyMx': { date: '2024-05-17', price: 0.002 },
-  'YrrUStgPugDp8BbfosqDeFssen6sA75ZS1QJvgnHtmY': { date: '2024-05-18', price: 0.0008 },
-  'FAqh648xeeaTqL7du49sztp9nfj5PjRQrfvaMccyd9cz': { date: '2024-05-19', price: 0.0012 },
-  '4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i': { date: '2024-05-20', price: 0.0003 },
-  '9t1H1uDJ558iMPNkEPSN1fqkpC4XSPQ6cqSf6uEsTfTR': { date: '2024-05-21', price: 0.0009 },
+  '3ne4mWqdYuNiYrYZC9TrA3FcfuFdErghH97vNPbjicr1': { date: '2025-08-16', price: 0.00002345 },//bonk
+  'EP2ib6dYdEeqD8MfE2ezHCxX3kP3K2eLKkirfPm5eyMx': { date: '2025-05-06', price: 0.5520 },//wif
+  'YrrUStgPugDp8BbfosqDeFssen6sA75ZS1QJvgnHtmY': { date: '2025-08-22', price: 0.04871 }, //launchcoin
+  'FAqh648xeeaTqL7du49sztp9nfj5PjRQrfvaMccyd9cz': { date: '2025-07-06', price: 0.01605 },//pengu
+  '4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i': { date: '2025-05-25', price: 0.01705 },//pnut
+  '9t1H1uDJ558iMPNkEPSN1fqkpC4XSPQ6cqSf6uEsTfTR': { date: '2025-05-31', price: 0.9985 },//spx
   '8WwcNqdZjCY5Pt7AkhupAFknV2txca9sq6YBkGzLbvdt': { date: '2024-05-22', price: 0.0015 },
-  'FRhB8L7Y9Qq41qZXYLtC2nw8An1RJfLLxRF2x9RwLLMo': { date: '2024-05-23', price: 0.0004 },
-  '9ViX1VductEoC2wERTSp2TuDxXPwAf69aeET8ENPJpsN': { date: '2024-05-24', price: 0.0007 },
-  '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama': { date: '2025-09-21', price: 0.00025 },
+  'FRhB8L7Y9Qq41qZXYLtC2nw8An1RJfLLxRF2x9RwLLMo': { date: '2025-04-25', price: 0.2536 },//popcat
+  '9ViX1VductEoC2wERTSp2TuDxXPwAf69aeET8ENPJpsN': { date: '2025-09-30', price: 0.05950 },//aura
+  '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama': { date: '2025-07-26', price: 0.01702 },//troll
   '9czr2MVyxgPCnDrbA7ywaqG3K1fgCkCQYbwSBKxnMJFS': { date: '2025-09-24', price: 0.00012 },
   '6GDrReNVfyjQDCuGMrKdG2JU7Uj8NCvBt2ukaL2mDj1L': { date: '2025-09-24', price: 0.00018 },
   'EPVwQEJCnenVSNYECMA2955BGTqJk2ptXuggrvtiFFG2': { date: '2025-09-24', price: 0.00022 },
@@ -61,7 +61,7 @@ const tokenListingData = {
   '83G6VzJzLRCnHBsLATj94VCpRimyyqwuN6ZfL11McADL': { date: '2025-10-06', price: 0.00038 },
   'G6XZu9m4yAmoW1uGFKcAHUW5ufpURBk4kCeWr9dP1KxJ': { date: '2025-10-06', price: 0.00052 },
   'GH8Ers4yzKR3UKDvgVu8cqJfGzU4cU62mTeg9bcJ7ug6': { date: '2025-10-06', price: 0.01849 },
-  'HYpXCaAT9YBu7vYa5BURGprsa23hmvdkqXtSUD5gQWdc':{ date: '2025-10-06', price: 0.00052 },
+  'HYpXCaAT9YBu7vYa5BURGprsa23hmvdkqXtSUD5gQWdc':{ date: '2025-10-06', price: 0.009695 },
 };
 
 // ---------- Percentage Calculation Function ----------
