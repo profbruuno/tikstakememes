@@ -33,6 +33,7 @@ const highRiskPairs = [
   '6HfaJiUuTXFZEfmdkQSNbvfe6i95Nh2wUVJ5dWMf7gtw',//retire
   '6GDrReNVfyjQDCuGMrKdG2JU7Uj8NCvBt2ukaL2mDj1L',//wojak
   'EPVwQEJCnenVSNYECMA2955BGTqJk2ptXuggrvtiFFG2',//momo
+  'F1FMsNYuCNRHTDVjSkNbiZLp4qv6r6oQyMRJM9ZYdkm3',//stupid coin
 ];
 
 // Updated data structure with both date and listing price
@@ -62,6 +63,7 @@ const tokenListingData = {
   'GH8Ers4yzKR3UKDvgVu8cqJfGzU4cU62mTeg9bcJ7ug6': { date: '2025-10-06', price: 0.01849 },
   'HYpXCaAT9YBu7vYa5BURGprsa23hmvdkqXtSUD5gQWdc':{ date: '2025-10-06', price: 0.009695 },
   '2CotF9J6Q6FMXq9igZmer6iHd6w8pWBD6dtnzMWzNbr3':{ date: '2025-10-08', price: 0.001645 }, //buidl
+  'F1FMsNYuCNRHTDVjSkNbiZLp4qv6r6oQyMRJM9ZYdkm3' :{ date: '2025-10-08', price: 0.001453},//stupid coin
 };
 
 // ---------- Percentage Calculation Function ----------
