@@ -61,7 +61,7 @@ const tokenListingData = {
   'G6XZu9m4yAmoW1uGFKcAHUW5ufpURBk4kCeWr9dP1KxJ': { date: '2025-10-06', price: 0.00052 },
   'GH8Ers4yzKR3UKDvgVu8cqJfGzU4cU62mTeg9bcJ7ug6': { date: '2025-10-06', price: 0.01849 },
   'HYpXCaAT9YBu7vYa5BURGprsa23hmvdkqXtSUD5gQWdc':{ date: '2025-10-06', price: 0.009695 },
-  '2CotF9J6Q6FMXq9igZmer6iHd6w8pWBD6dtnzMWzNbr3':{ date: '2025-10-08', price: 0.001645 },
+  '2CotF9J6Q6FMXq9igZmer6iHd6w8pWBD6dtnzMWzNbr3':{ date: '2025-10-08', price: 0.001645 }, //buidl
 };
 
 // ---------- Percentage Calculation Function ----------
