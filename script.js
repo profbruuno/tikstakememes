@@ -2,16 +2,16 @@
 const popularPairs = [
   'GH8Ers4yzKR3UKDvgVu8cqJfGzU4cU62mTeg9bcJ7ug6', // $michi
   'HYpXCaAT9YBu7vYa5BURGprsa23hmvdkqXtSUD5gQWdc',//mini
-  '3ne4mWqdYuNiYrYZC9TrA3FcfuFdErghH97vNPbjicr1', // 
-  'EP2ib6dYdEeqD8MfE2ezHCxX3kP3K2eLKkirfPm5eyMx',  // Example
-  'YrrUStgPugDp8BbfosqDeFssen6sA75ZS1QJvgnHtmY',
-  'FAqh648xeeaTqL7du49sztp9nfj5PjRQrfvaMccyd9cz',
-  '4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i',
-  '9t1H1uDJ558iMPNkEPSN1fqkpC4XSPQ6cqSf6uEsTfTR',
-  '8WwcNqdZjCY5Pt7AkhupAFknV2txca9sq6YBkGzLbvdt',
-  'FRhB8L7Y9Qq41qZXYLtC2nw8An1RJfLLxRF2x9RwLLMo',
-  '9ViX1VductEoC2wERTSp2TuDxXPwAf69aeET8ENPJpsN',
-  '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama',
+  '3ne4mWqdYuNiYrYZC9TrA3FcfuFdErghH97vNPbjicr1', //bonk
+  'EP2ib6dYdEeqD8MfE2ezHCxX3kP3K2eLKkirfPm5eyMx',  // wif
+  'YrrUStgPugDp8BbfosqDeFssen6sA75ZS1QJvgnHtmY', // launchcoin
+  'FAqh648xeeaTqL7du49sztp9nfj5PjRQrfvaMccyd9cz', // pengu
+  '4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i', // pnut
+  '9t1H1uDJ558iMPNkEPSN1fqkpC4XSPQ6cqSf6uEsTfTR', // spx
+  '8WwcNqdZjCY5Pt7AkhupAFknV2txca9sq6YBkGzLbvdt', // pippin
+  'FRhB8L7Y9Qq41qZXYLtC2nw8An1RJfLLxRF2x9RwLLMo', // popcat
+  '9ViX1VductEoC2wERTSp2TuDxXPwAf69aeET8ENPJpsN', // aura
+  '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama', // troll
 ];
 
 const newPairs = [
@@ -20,19 +20,19 @@ const newPairs = [
   '6mEJbpdzLPyEzgJsrYkHSm1L4Cir1WogxqFBizeqwCas',//Humanai
   'BuX9TN5doE5hCqpcmqMKYkidXC8zgBK5wHHKujdaAbiQ',//RYS
   '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama',// Troll
-  '7ccKzmrXBpFHwyZGPqPuKL6bEyWAETSnHwnWe3jEneVc',
-  '8oopi6gVFh4FA1mL5Jj35yRetfpmWiUDTfhCv31gkA3v',
-  '5wNu5QhdpRGrL37ffcd6TMMqZugQgxwafgz477rShtHy',
-'UKSPrYDU4veB4cAfV9HkzNg9gNP1jsoch8oySMG9tcJ',
-'Q2sPHPdUWFMg7M7wwrQKLrn619cAucfRsmhVJffodSp',
+  '7ccKzmrXBpFHwyZGPqPuKL6bEyWAETSnHwnWe3jEneVc',//uranus
+  '8oopi6gVFh4FA1mL5Jj35yRetfpmWiUDTfhCv31gkA3v',//shitcoin
+  '5wNu5QhdpRGrL37ffcd6TMMqZugQgxwafgz477rShtHy',//neet
+'UKSPrYDU4veB4cAfV9HkzNg9gNP1jsoch8oySMG9tcJ',//fartless
+'Q2sPHPdUWFMg7M7wwrQKLrn619cAucfRsmhVJffodSp',//useless
 ];
 
 const highRiskPairs = [
-  '9czr2MVyxgPCnDrbA7ywaqG3K1fgCkCQYbwSBKxnMJFS', // Example high risk token
-  'KSeAucEoqTBB4ttakHYE1encbxjn2u9zUa9ursDLe1E', // Example high risk token
-  '6HfaJiUuTXFZEfmdkQSNbvfe6i95Nh2wUVJ5dWMf7gtw',
-  '6GDrReNVfyjQDCuGMrKdG2JU7Uj8NCvBt2ukaL2mDj1L',
-  'EPVwQEJCnenVSNYECMA2955BGTqJk2ptXuggrvtiFFG2',
+  '9czr2MVyxgPCnDrbA7ywaqG3K1fgCkCQYbwSBKxnMJFS', // homo
+  'KSeAucEoqTBB4ttakHYE1encbxjn2u9zUa9ursDLe1E', // supercycle
+  '6HfaJiUuTXFZEfmdkQSNbvfe6i95Nh2wUVJ5dWMf7gtw',//retire
+  '6GDrReNVfyjQDCuGMrKdG2JU7Uj8NCvBt2ukaL2mDj1L',//wojak
+  'EPVwQEJCnenVSNYECMA2955BGTqJk2ptXuggrvtiFFG2',//momo
 ];
 
 // Updated data structure with both date and listing price
@@ -60,7 +60,7 @@ const tokenListingData = {
   '6mEJbpdzLPyEzgJsrYkHSm1L4Cir1WogxqFBizeqwCas': { date: '2025-10-06', price: 0.00045 },
   '83G6VzJzLRCnHBsLATj94VCpRimyyqwuN6ZfL11McADL': { date: '2025-10-06', price: 0.00038 },
   'G6XZu9m4yAmoW1uGFKcAHUW5ufpURBk4kCeWr9dP1KxJ': { date: '2025-10-06', price: 0.00052 },
-  'GH8Ers4yzKR3UKDvgVu8cqJfGzU4cU62mTeg9bcJ7ug6': { date: '2025-10-06', price: 0.00052 },
+  'GH8Ers4yzKR3UKDvgVu8cqJfGzU4cU62mTeg9bcJ7ug6': { date: '2025-10-06', price: 0.01849 },
   'HYpXCaAT9YBu7vYa5BURGprsa23hmvdkqXtSUD5gQWdc':{ date: '2025-10-06', price: 0.00052 },
 };
 
