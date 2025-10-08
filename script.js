@@ -17,7 +17,6 @@ const popularPairs = [
 const newPairs = [
   'G6XZu9m4yAmoW1uGFKcAHUW5ufpURBk4kCeWr9dP1KxJ',//LLM
   '83G6VzJzLRCnHBsLATj94VCpRimyyqwuN6ZfL11McADL',//nub
-  '6mEJbpdzLPyEzgJsrYkHSm1L4Cir1WogxqFBizeqwCas',//Humanai
   'BuX9TN5doE5hCqpcmqMKYkidXC8zgBK5wHHKujdaAbiQ',//RYS
   '4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama',// Troll
   '7ccKzmrXBpFHwyZGPqPuKL6bEyWAETSnHwnWe3jEneVc',//uranus
@@ -57,7 +56,6 @@ const tokenListingData = {
   '5wNu5QhdpRGrL37ffcd6TMMqZugQgxwafgz477rShtHy': { date: '2025-09-30', price: 0.00042 },
   'UKSPrYDU4veB4cAfV9HkzNg9gNP1jsoch8oySMG9tcJ': { date: '2025-09-30', price: 0.00019 },
   'Q2sPHPdUWFMg7M7wwrQKLrn619cAucfRsmhVJffodSp': { date: '2025-09-30', price: 0.00031 },
-  '6mEJbpdzLPyEzgJsrYkHSm1L4Cir1WogxqFBizeqwCas': { date: '2025-10-06', price: 0.00045 },
   '83G6VzJzLRCnHBsLATj94VCpRimyyqwuN6ZfL11McADL': { date: '2025-10-06', price: 0.00038 },
   'G6XZu9m4yAmoW1uGFKcAHUW5ufpURBk4kCeWr9dP1KxJ': { date: '2025-10-06', price: 0.00052 },
   'GH8Ers4yzKR3UKDvgVu8cqJfGzU4cU62mTeg9bcJ7ug6': { date: '2025-10-06', price: 0.01849 },
