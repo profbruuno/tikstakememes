@@ -1,5 +1,6 @@
 // ---------- Config: curated lists ----------
 const popularPairs = [
+  '879F697iuDJGMevRkRcnW21fcXiAeLJK1ffsw2ATebce',//mew
   'GH8Ers4yzKR3UKDvgVu8cqJfGzU4cU62mTeg9bcJ7ug6', // $michi
   'HYpXCaAT9YBu7vYa5BURGprsa23hmvdkqXtSUD5gQWdc',//mini
   '3ne4mWqdYuNiYrYZC9TrA3FcfuFdErghH97vNPbjicr1', //bonk
@@ -38,6 +39,7 @@ const highRiskPairs = [
 
 // Updated data structure with both date and listing price
 const tokenListingData = {
+  '879F697iuDJGMevRkRcnW21fcXiAeLJK1ffsw2ATebce': { date: '2025-10-13', price: 0.002 }, // mew
   'BuX9TN5doE5hCqpcmqMKYkidXC8zgBK5wHHKujdaAbiQ': { date: '2025-10-05', price: 0.0001 }, // RYS
   '6HfaJiUuTXFZEfmdkQSNbvfe6i95Nh2wUVJ5dWMf7gtw': { date: '2025-09-20', price: 0.00015 },
   '3ne4mWqdYuNiYrYZC9TrA3FcfuFdErghH97vNPbjicr1': { date: '2025-08-16', price: 0.00002345 },//bonk
